@@ -1,4 +1,5 @@
 using DataAccess.Contexts;
+using DataAccess.Extensions;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,14 +13,14 @@ namespace DataAccess
     {
       services.AddDbContext<ExamCreatorDbContext>(options => options.UseSqlite(configuration.GetConnectionString("ExamCreatorDB")));
 
-      services.AddIdentityCore<User>(option =>
+      services.AddIdentity<User, Role>(options =>
       {
-        option.Password.RequiredLength = 8;
-        option.Password.RequireDigit = true;
-        option.Password.RequireLowercase = true;
-        option.Password.RequireUppercase = true;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireUppercase = true;
 
-        option.User.RequireUniqueEmail = true;
+        options.User.RequireUniqueEmail = true;
       }).AddEntityFrameworkStores<ExamCreatorDbContext>();
 
       return services;
