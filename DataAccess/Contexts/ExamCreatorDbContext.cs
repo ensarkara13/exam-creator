@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DataAccess.Contexts
 {
-  public class ExamCreatorDbContext : IdentityDbContext
+  public class ExamCreatorDbContext : IdentityDbContext<User, Role, int>
   {
-    public ExamCreatorDbContext(DbContextOptions options) : base(options)
+    public ExamCreatorDbContext(DbContextOptions<ExamCreatorDbContext> options) : base(options)
     {
     }
     public DbSet<Exam> Exams { get; set; }
@@ -18,6 +18,10 @@ namespace DataAccess.Contexts
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+
+      builder.Entity<User>()
+      .HasKey(u => u.Id);
+
       builder.Entity<User>()
       .HasMany(u => u.UserExams)
       .WithOne(u => u.User);
@@ -36,6 +40,11 @@ namespace DataAccess.Contexts
       .HasMany(q => q.QuestionOptions)
       .WithOne(q => q.Question)
       .OnDelete(DeleteBehavior.Cascade);
+
+      builder.Entity<UserExam>()
+      .HasKey(u => new { u.ExamId, u.UserId });
+
+      base.OnModelCreating(builder);
     }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
