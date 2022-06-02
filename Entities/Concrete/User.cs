@@ -6,5 +6,7 @@ namespace Entities.Concrete
   {
     public string Name { get; set; }
     public string LastName { get; set; }
+
+    public ICollection<UserExam> UserExams { get; set; }
   }
 }
