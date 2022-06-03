@@ -1,9 +1,11 @@
+using Business;
 using DataAccess;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = builder.Configuration;
 
 builder.Services.AddDataAccess(configuration);
+builder.Services.AddBusinessLogic();
 
 builder.Services.AddControllersWithViews();
 
