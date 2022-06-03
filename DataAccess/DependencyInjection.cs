@@ -1,5 +1,7 @@
 using DataAccess.Contexts;
 using DataAccess.Extensions;
+using DataAccess.Repositories.Abstract;
+using DataAccess.Repositories.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,11 @@ namespace DataAccess
 
         options.User.RequireUniqueEmail = true;
       }).AddEntityFrameworkStores<ExamCreatorDbContext>();
+
+      services.AddScoped<IExamRepository, EFExamRepository>();
+      services.AddScoped<IUserExamRepository, EFUserExamRepository>();
+      services.AddScoped<IQuestionRepository, EFQuestionRepository>();
+      services.AddScoped<IQuestionOptionRepository, EFQuestionOptionRepository>();
 
       return services;
     }
