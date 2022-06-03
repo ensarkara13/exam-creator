@@ -4,9 +4,9 @@ using Entities.Concrete;
 
 namespace DataAccess.Repositories.Concrete.EntityFramework
 {
-  public class QuestionOptionRepository : GenericRepository<QuestionOption>, IQuestionOptionRepository
+  public class EFQuestionOptionRepository : GenericRepository<QuestionOption>, IQuestionOptionRepository
   {
-    public QuestionOptionRepository(ExamCreatorDbContext context) : base(context)
+    public EFQuestionOptionRepository(ExamCreatorDbContext context) : base(context)
     {
     }
   }
