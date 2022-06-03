@@ -1,5 +1,4 @@
 using DataAccess.Contexts;
-using DataAccess.Extensions;
 using DataAccess.Repositories.Abstract;
 using DataAccess.Repositories.Concrete.EntityFramework;
 using Entities.Concrete;
