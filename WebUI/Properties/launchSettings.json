@@ -11,7 +11,7 @@
     "WebUI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://localhost:7252;http://localhost:5161",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
