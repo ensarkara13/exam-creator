@@ -4,7 +4,7 @@ using FluentValidation.Results;
 
 namespace Core.Utilities.Results
 {
-  public class DataResult<T>
+  public struct DataResult<T>
   {
     public bool IsSuccess { get; private set; }
     public string Message { get; private set; }
