@@ -1,5 +1,3 @@
-using Entities.DTOs.Question;
-
 namespace Business.Abstract
 {
   public interface IQuestionService

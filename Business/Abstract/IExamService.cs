@@ -1,4 +1,3 @@
-using Entities.DTOs.Exam;
 
 namespace Business.Abstract
 {
