@@ -2,5 +2,8 @@ using Entities.Concrete;
 
 namespace DataAccess.Repositories.Abstract
 {
-  public interface IExamRepository : IGenericRepository<Exam> { }
+  public interface IExamRepository : IGenericRepository<Exam>
+  {
+    Task<Exam> GetExamWithQuestions(int id);
+  }
 }
