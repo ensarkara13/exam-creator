@@ -26,8 +26,7 @@ namespace DataAccess.Repositories.Concrete
 
     public async Task Delete(T entity)
     {
-      _context.Update(entity);
-      await _context.SaveChangesAsync();
+      await Update(entity);
     }
 
     public async Task DeleteRange(List<T> entities)
