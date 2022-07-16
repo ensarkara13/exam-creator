@@ -5,11 +5,13 @@ namespace Business.Concrete
     private readonly IQuestionRepository _repository;
     private readonly IMapper _mapper;
     private readonly IValidator<QuestionAddDto> _addValidator;
-    public QuestionManager(IQuestionRepository repository, IMapper mapper, IValidator<QuestionAddDto> addValidator)
+    private readonly IQuestionOptionService _optionService;
+    public QuestionManager(IQuestionRepository repository, IMapper mapper, IValidator<QuestionAddDto> addValidator, IQuestionOptionService optionService)
     {
       _repository = repository;
       _mapper = mapper;
       _addValidator = addValidator;
+      _optionService = optionService;
     }
     public async Task<Result> AddQuestionListAsync(List<QuestionAddDto> questionAddDtos)
     {
@@ -26,6 +28,12 @@ namespace Business.Concrete
       List<Question> questions = _mapper.Map<List<Question>>(questionAddDtos);
 
       await _repository.AddRange(questions);
+
+      foreach (QuestionAddDto questionAddDto in questionAddDtos)
+      {
+        await _optionService.AddQuestionOptionListAsync(questionAddDto.QuestionOptions);
+      }
+
       return Result.Success();
     }
 

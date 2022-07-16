@@ -5,13 +5,13 @@ namespace Business.Concrete
     private readonly IExamRepository _repository;
     private readonly IMapper _mapper;
     private readonly IValidator<ExamAddDto> _addValidator;
-    private readonly IValidator<ExamUpdateDto> _updateValidator;
-    public ExamManager(IExamRepository repository, IMapper mapper, IValidator<ExamAddDto> addValidator, IValidator<ExamUpdateDto> updateValidator)
+    private readonly IQuestionService _questionService;
+    public ExamManager(IExamRepository repository, IMapper mapper, IValidator<ExamAddDto> addValidator, IQuestionService questionService)
     {
       _repository = repository;
       _mapper = mapper;
       _addValidator = addValidator;
-      _updateValidator = updateValidator;
+      _questionService = questionService;
     }
     public async Task<Result> AddExamAsync(ExamAddDto examAddDto)
     {
@@ -24,6 +24,8 @@ namespace Business.Concrete
 
       Exam exam = _mapper.Map<Exam>(examAddDto);
       await _repository.Add(exam);
+
+      await _questionService.AddQuestionListAsync(examAddDto.Questions);
 
       return Result.Success();
     }
