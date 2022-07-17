@@ -1,8 +1,9 @@
+using Core.DTOs;
+
 namespace Entities.DTOs.QuestionOption
 {
-  public class QuestionOptionGetDto
+  public class QuestionOptionGetDto : EntityGetDto
   {
-    public int Id { get; set; }
     public string OptionText { get; set; }
     public bool IsRightAnswer { get; set; }
   }

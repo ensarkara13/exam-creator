@@ -1,8 +1,9 @@
+using Core.DTOs;
+
 namespace Entities.DTOs.Exam
 {
-  public class ExamGetDto
+  public class ExamGetDto : EntityGetDto
   {
-    public int Id { get; set; }
     public string Title { get; set; }
   }
 }

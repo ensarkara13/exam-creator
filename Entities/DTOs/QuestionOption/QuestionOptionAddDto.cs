@@ -4,6 +4,6 @@ namespace Entities.DTOs.QuestionOption
   {
     public string OptionText { get; set; }
     public bool IsRightAnswer { get; set; }
-    public int QuestionId { get; set; }
+    public Guid QuestionId { get; set; }
   }
 }
