@@ -25,17 +25,22 @@ namespace Business.Concrete
       Exam exam = _mapper.Map<Exam>(examAddDto);
       await _repository.Add(exam);
 
+      foreach (QuestionAddDto question in examAddDto.Questions)
+      {
+        question.ExamId = exam.Id;
+      }
+
       await _questionService.AddQuestionListAsync(examAddDto.Questions);
 
       return Result.Success();
     }
 
-    public Task<Result> DeleteExamAsync(int id)
+    public Task<Result> DeleteExamAsync(Guid id)
     {
       throw new NotImplementedException();
     }
 
-    public async Task<DataResult<ExamGetWithQuestionsDto>> GetExamAsync(int id)
+    public async Task<DataResult<ExamGetWithQuestionsDto>> GetExamAsync(Guid id)
     {
       Exam exam = await _repository.GetExamWithQuestions(id);
       if (exam == null)
