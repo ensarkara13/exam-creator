@@ -29,9 +29,13 @@ namespace Business.Concrete
 
       await _repository.AddRange(questions);
 
-      foreach (QuestionAddDto questionAddDto in questionAddDtos)
+      for (int i = 0; i < questionAddDtos.Count; i++)
       {
-        await _optionService.AddQuestionOptionListAsync(questionAddDto.QuestionOptions);
+        foreach (QuestionOptionAddDto optionAddDto in questionAddDtos[i].QuestionOptions)
+        {
+          optionAddDto.QuestionId = questions[i].Id;
+        }
+        await _optionService.AddQuestionOptionListAsync(questionAddDtos[i].QuestionOptions);
       }
 
       return Result.Success();
