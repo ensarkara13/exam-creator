@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetExamAsync(int id)
+    public async Task<IActionResult> GetExamAsync(Guid id)
     {
       DataResult<ExamGetWithQuestionsDto> result = await _examService.GetExamAsync(id);
 
