@@ -13,7 +13,7 @@ namespace DataAccess.Repositories.Concrete.EntityFramework
       _context = context;
     }
 
-    public async Task<Exam> GetExamWithQuestions(int id)
+    public async Task<Exam> GetExamWithQuestions(Guid id)
     {
       return await _context.Exams.Where(e => e.Id == id).Include(e => e.Questions).ThenInclude(q => q.QuestionOptions).FirstOrDefaultAsync();
     }

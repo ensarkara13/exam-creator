@@ -4,6 +4,6 @@ namespace DataAccess.Repositories.Abstract
 {
   public interface IExamRepository : IGenericRepository<Exam>
   {
-    Task<Exam> GetExamWithQuestions(int id);
+    Task<Exam> GetExamWithQuestions(Guid id);
   }
 }
