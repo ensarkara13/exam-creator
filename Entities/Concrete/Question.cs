@@ -6,7 +6,7 @@ namespace Entities.Concrete
   {
     public string QuestionText { get; set; }
 
-    public int ExamId { get; set; }
+    public Guid ExamId { get; set; }
     public Exam Exam { get; set; }
     public ICollection<QuestionOption> QuestionOptions { get; set; }
   }

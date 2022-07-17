@@ -7,7 +7,7 @@ namespace Entities.Concrete
     public string OptionText { get; set; }
     public bool IsRightAnswer { get; set; }
 
-    public int QuestionId { get; set; }
+    public Guid QuestionId { get; set; }
     public Question Question { get; set; }
   }
 }
