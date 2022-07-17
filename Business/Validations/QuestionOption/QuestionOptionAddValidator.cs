@@ -10,8 +10,7 @@ namespace Business.Validations.QuestionOption
         .WithMessage("Seçenek alanı boş bırakılamaz.");
 
       RuleFor(q => q.QuestionId)
-        .GreaterThan(0)
-        .WithMessage("Geçersiz soru ID");
+        .NotEmpty();
     }
   }
 }

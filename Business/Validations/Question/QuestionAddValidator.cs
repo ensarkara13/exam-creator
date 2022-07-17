@@ -11,8 +11,7 @@ namespace Business.Validations.Question
         .MinimumLength(5);
 
       RuleFor(q => q.ExamId)
-        .GreaterThan(0)
-        .WithMessage("Geçersiz sınav ID");
+        .NotEmpty();
     }
   }
 }
