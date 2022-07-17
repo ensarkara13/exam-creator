@@ -12,6 +12,7 @@ namespace Business.Mappings
 
       // Get
       CreateMap<Question, QuestionGetDto>();
+      CreateMap<Question, QuestionGetWithOptionsDto>();
     }
   }
 }
