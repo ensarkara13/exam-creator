@@ -7,7 +7,7 @@ namespace Business.Mappings
     public ExamProfile()
     {
       // Add
-      CreateMap<ExamAddDto, Exam>();
+      CreateMap<ExamAddDto, Exam>().ForMember(d => d.Id, s => s.MapFrom(s => Guid.NewGuid()));
 
       // Update
       CreateMap<ExamUpdateDto, Exam>();

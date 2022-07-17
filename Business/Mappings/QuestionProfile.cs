@@ -6,7 +6,7 @@ namespace Business.Mappings
     public QuestionProfile()
     {
       // Add
-      CreateMap<QuestionAddDto, Question>();
+      CreateMap<QuestionAddDto, Question>().ForMember(d => d.Id, s => s.MapFrom(s => Guid.NewGuid()));
 
       // Update
 
