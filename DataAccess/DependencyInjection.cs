@@ -13,6 +13,7 @@ namespace DataAccess
     {
       services.AddDbContext<ExamCreatorDbContext>(options => options.UseSqlite(configuration.GetConnectionString("ExamCreatorDB")));
 
+      services.AddScoped<IUserRepository, EFUserRepository>();
       services.AddScoped<IExamRepository, EFExamRepository>();
       services.AddScoped<IUserExamRepository, EFUserExamRepository>();
       services.AddScoped<IQuestionRepository, EFQuestionRepository>();
