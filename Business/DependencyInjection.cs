@@ -2,6 +2,7 @@ using System.Reflection;
 using Business.Concrete;
 using DataAccess.Contexts;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Business
@@ -15,10 +16,12 @@ namespace Business
       services.AddScoped<IQuestionOptionService, QuestionOptionManager>();
       services.AddScoped<IUserService, UserManager>();
 
+      services.AddScoped<IPasswordHasher<string>, PasswordHasher<string>>();
+
       services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
       services.AddAutoMapper(Assembly.GetExecutingAssembly());
-      
+
       return services;
     }
   }
