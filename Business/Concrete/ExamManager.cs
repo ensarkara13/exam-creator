@@ -35,9 +35,17 @@ namespace Business.Concrete
       return Result.Success();
     }
 
-    public Task<Result> DeleteExamAsync(Guid id)
+    public async Task<Result> DeleteExamAsync(Guid id)
     {
-      throw new NotImplementedException();
+      Exam exam = await _repository.Get(e => e.Id == id);
+      if (exam == null)
+      {
+        return Result.Failure("Silinecek sınav bulunamadı.");
+      }
+
+      await _repository.HardDelete(exam);
+
+      return Result.Success();
     }
 
     public async Task<DataResult<ExamGetWithQuestionsDto>> GetExamAsync(Guid id)
