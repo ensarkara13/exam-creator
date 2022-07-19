@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DataAccess.Contexts
 {
-  public class ExamCreatorDbContext : IdentityDbContext<User, Role, int>
+  public class ExamCreatorDbContext : DbContext
   {
     public ExamCreatorDbContext(DbContextOptions<ExamCreatorDbContext> options) : base(options)
     {
