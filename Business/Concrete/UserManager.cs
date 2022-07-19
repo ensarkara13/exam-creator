@@ -17,14 +17,40 @@ namespace Business.Concrete
       _passwordHasher = passwordHasher;
     }
 
-    public Task<Result> AddUserAsync(UserAddDto userAddDto)
+    public async Task<Result> AddUserAsync(UserAddDto userAddDto)
     {
-      throw new NotImplementedException();
+      ValidationResult validationResult = _addValidator.Validate(userAddDto);
+      if (!validationResult.IsValid)
+      {
+        return Result.Failure(validationResult);
+      }
+
+      User user = await _repository.Get(u => u.Email == userAddDto.Email);
+      if (user != null)
+      {
+        return Result.Failure("Kullanıcı zaten kayıtlı");
+      }
+
+      user = _mapper.Map<User>(userAddDto);
+      user.Password = _passwordHasher.HashPassword(userAddDto.Email, userAddDto.Password);
+      user.Role = string.IsNullOrEmpty(userAddDto.Role) ? "User" : userAddDto.Role;
+
+      await _repository.Add(user);
+
+      return Result.Success();
     }
 
-    public Task<DataResult<UserGetDto>> GetUserByEmailAsync(string email)
+    public async Task<DataResult<UserGetDto>> GetUserByEmailAsync(string email)
     {
-      throw new NotImplementedException();
+      User user = await _repository.Get(u => u.Email == email);
+      if (user == null)
+      {
+        return DataResult<UserGetDto>.Failure("Kullanıcı bulunamadı");
+      }
+
+      UserGetDto userGetDto = _mapper.Map<UserGetDto>(user);
+
+      return DataResult<UserGetDto>.Success(userGetDto);
     }
   }
 }
