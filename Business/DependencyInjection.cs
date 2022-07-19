@@ -1,5 +1,6 @@
 using System.Reflection;
 using Business.Concrete;
+using DataAccess.Contexts;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,11 +13,12 @@ namespace Business
       services.AddScoped<IExamService, ExamManager>();
       services.AddScoped<IQuestionService, QuestionManager>();
       services.AddScoped<IQuestionOptionService, QuestionOptionManager>();
+      services.AddScoped<IUserService, UserManager>();
 
       services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
       services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+      
       return services;
     }
   }
