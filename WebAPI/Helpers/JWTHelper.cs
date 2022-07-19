@@ -7,13 +7,15 @@ namespace WebAPI.Helpers
 {
   internal class JWTHelper
   {
-    public static string GenerateAccessToken(IConfiguration configuration)
+    public static string GenerateAccessToken(IConfiguration configuration, string role)
     {
       TokenOption tokenOption = configuration.GetSection("TokenOption").Get<TokenOption>();
 
       List<Claim> claims = new List<Claim>();
+      claims.Add(new Claim(ClaimTypes.Role, role));
 
       JwtSecurityToken token = new JwtSecurityToken(
+        claims: claims,
         issuer: tokenOption.Issuer,
         audience: tokenOption.Audience,
         notBefore: DateTime.Now,
