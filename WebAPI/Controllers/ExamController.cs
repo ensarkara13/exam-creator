@@ -1,10 +1,12 @@
 
 using Entities.DTOs.Exam;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
   [ApiController]
   [Route("exams")]
+  [Authorize]
   public class ExamController : ControllerBase
   {
     private readonly IExamService _examService;
@@ -50,6 +52,19 @@ namespace WebAPI.Controllers
       }
 
       return BadRequest(result.ErrorMessages);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteExamAsync(Guid id)
+    {
+      Result result = await _examService.DeleteExamAsync(id);
+
+      if (result.IsSuccess)
+      {
+        return NoContent();
+      }
+
+      return BadRequest(result.Message);
     }
   }
 }
