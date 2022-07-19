@@ -1,6 +1,5 @@
 using System.Reflection;
 using Business.Concrete;
-using DataAccess.Contexts;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
